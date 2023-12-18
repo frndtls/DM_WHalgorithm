@@ -3,6 +3,8 @@
 
 #include "operators.h"
 
+bool hashPropos[26];
+
 void initHashPropos() { memset(hashPropos, 0, sizeof(hashPropos)); }
 bool isExp(const std::string& exp) {
   // 只检查操作符前后是否有操作数，操作数前后是否有操作符
@@ -17,7 +19,8 @@ bool isExp(const std::string& exp) {
       } else if (exp[i] == '(') {
         if (i == exp.length() - 1) return false;
         if (i != 0 && (Myoperators::isProposition(exp[i - 1]))) return false;
-        if (exp[i + 1] != '(' && Myoperators::isOperator(exp[i + 1]))
+        if (exp[i + 1] != '(' && exp[i + 1] != '!' &&
+            Myoperators::isOperator(exp[i + 1]))
           return false;
       } else if (exp[i] == ')') {
         if (i == 0) return false;
@@ -26,8 +29,6 @@ bool isExp(const std::string& exp) {
         if (i != exp.length() - 1 && exp[i + 1] != ')' &&
             Myoperators::isProposition(exp[i + 1]))
           return false;
-      } else if (exp[i] == '\0') {
-        if (i != exp.length() - 1) return false;
       } else {
         if (i == 0 || i == exp.length() - 1) return false;
         if (Myoperators::isOperator(exp[i - 1]) && exp[i - 1] != ')')
@@ -60,14 +61,10 @@ void getInfoOfExp(const std::string& exp, std::vector<Propos>& propos) {
       if (i == propos.size()) propos.push_back(Propos(c, false));
     }
   }
-  for (int i = 0; i < propos.size(); ++i) std::cout << propos[i].name << ' ';
+  // for (int i = 0; i < propos.size(); ++i) std::cout << propos[i].name << ' ';
 }
 
 std::string expToRPN(const std::string& exp) {
-  if (!isExp(exp)) {
-    std::cout << "expression error" << std::endl;
-    return "";
-  }
   std::string RPN;
   std::stack<char> s;
   int opndNum = 0;
@@ -155,12 +152,13 @@ std::string expToRPN(const std::string& exp) {
 }
 
 void assignForPropos(int count, std::vector<Propos>& propos) {
+  initHashPropos();
   int width = propos.size();
   for (int j = 0; j < width; j++) {
     int res = count & 1;
     // 说明末尾位为1
-    propos[width - j].value = static_cast<bool>(res);
-    hashPropos[propos[width - j].name - 'A'] = static_cast<bool>(res);
+    propos[width - 1 - j].value = static_cast<bool>(res);
+    hashPropos[propos[width - 1 - j].name - 'A'] = static_cast<bool>(res);
     count >>= 1;
   }
 }
@@ -168,17 +166,17 @@ void assignForPropos(int count, std::vector<Propos>& propos) {
 bool rpnToValue(const std::string& rpn) {
   std::stack<char> s;
   std::stack<bool> propos;
-  s.push('\0');
   for (auto c : rpn) {
     if (Myoperators::isProposition(c)) {
       propos.push(hashPropos[c - 'A']);
+      // std::cout << hashPropos[c - 'A'] << std::endl;
       continue;
     } else if (Myoperators::isOperator(c)) {
       if (c == '!') {
         // 一目
         bool opnd1 = propos.top();
         propos.pop();
-        int res = Myoperators::calcul(opnd1, c);
+        bool res = Myoperators::calcul(opnd1, c);
         propos.push(res);
       } else {
         // 二目
@@ -186,7 +184,7 @@ bool rpnToValue(const std::string& rpn) {
         propos.pop();
         bool opnd1 = propos.top();
         propos.pop();
-        int res = Myoperators::calcul(opnd1, c, opnd2);
+        bool res = Myoperators::calcul(opnd1, c, opnd2);
         propos.push(res);
       }
     }
@@ -198,7 +196,21 @@ void expToTT(const std::string& rpn, std::vector<Propos> propos) {
   // rpn propos都已经初始化
   int width = propos.size();
 
+  // 输出表头
+  for (int i = 0; i < width + 1; ++i) {
+    if (i == width) {
+      std::cout << 'V' << std::endl;
+      continue;
+    }
+    std::cout << propos[i].name << ' ';
+  }
+
   for (int count = 0; count < std::pow(2, width); ++count) {
     assignForPropos(count, propos);
+    // 输出取值
+    for (int i = 0; i < width; ++i) {
+      std::cout << propos[i].value << ' ';
+    }
+    std::cout << rpnToValue(rpn) << std::endl;
   }
 }

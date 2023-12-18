@@ -16,7 +16,7 @@ struct Propos {
       : name(name), value(value) {}
 };
 
-bool hashPropos[26];
+extern bool hashPropos[26];
 void initHashPropos();
 void getInfoOfExp(const std::string& exp, std::vector<Propos>& propos);
 void assignForPropos(int count, std::vector<Propos>& propos);

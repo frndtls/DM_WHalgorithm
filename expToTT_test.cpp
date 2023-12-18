@@ -8,10 +8,10 @@
 int main() {
   std::string str;
   std::cin >> str;
-  str += '\0';
   std::vector<Propos> propos;
   getInfoOfExp(str, propos);
-  // std::string RPN = expToRPN(str);
-  // std::cout << RPN << std::endl;
+  str += '\0';
+  expToTT(expToRPN(str), propos);
+
   return 0;
 }
