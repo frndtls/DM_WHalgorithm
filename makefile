@@ -1,4 +1,4 @@
-all: expToTT_test expToPar_test ttToExp_test boilDownInference_test
+all: expToTT_test expToPar_test ttToExp_test boilDownInference_test WHalgorithm_test
 
 expToTT_test:expToTT_test.o expToTT.o operators.o
 	g++ $^ -o $@
@@ -11,6 +11,16 @@ ttToExp_test:ttToExp_test.o expToPar.o expToTT.o operators.o
 
 boilDownInference_test:boilDownInference_test.o expToTT.o expToPar.o operators.o boilDownInference.o
 	g++ $^ -o $@
+
+WHalgorithm_test: WHalgorithm_test.o expToTT.o  operators.o WHalgorithm.o
+	g++ $^ -o $@
+
+WHalgorithm_test.o:WHalgorithm_test.cpp
+	g++ -c $^ -o $@
+
+WHalgorithm.o:WHalgorithm.cpp
+	g++ -c $^ -o $@
+
 boilDownInference.o:boilDownInference.cpp
 	g++ -c $^ -o $@
 
@@ -33,4 +43,4 @@ operators.o:operators.cpp
 	g++ -c $^ -o $@
 	
 clean:
-	del *.o *.exe
+	rm *.o *.exe
