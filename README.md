@@ -18,7 +18,7 @@
      3. 测试代码为 **expToTT_test.cpp**
         1. 直接输入公式测试即可
    
-        ![测试代码](../code/images/expToTT_test.png)
+        ![测试代码](./images/expToTT_test.png)
    
 2. 由命题列主析取范式，主合取范式： 
      1. 由命题公式求出真值表；
@@ -26,7 +26,7 @@
      3. 测试代码为 **expToPar_test.cpp**
         1. 直接输入公式测试即可
    
-        ![测试代码](../code/images/expToPar_test.png)
+        ![测试代码](./images/expToPar_test.png)
 
 3. 由真值表列命题公式 
      1. 写**主析取范式**
@@ -36,7 +36,7 @@
         3. 再按行输入真值表，比如```1 1 0```,表示P、Q均为1时，公式为0；
         4. **注意输入正确的真值表，避免冲突**
    
-        ![测试代码](../code/images/ttToExp_test.png)
+        ![测试代码](./images/ttToExp_test.png)
  
 - **归结推理的实现**
 1. 思路：
@@ -48,7 +48,7 @@
 2. 测试代码为 **boilDownInference_test.cpp**
    1. 依次输入前提与结论，测试即可；
    
-        ![测试代码](../code/images/boilDowninference_test.png)
+        ![测试代码](./images/boilDowninference_test.png)
 
 - **王浩算法的实现**
 1. 思路：
@@ -63,4 +63,4 @@
 2. 测试代码为 **WHalgorithm_test.cpp**
    1. 依次输入前提与结论，测试即可
 
-        ![测试代码](../code/images/WHalgorithm_test.png)
+        ![测试代码](./images/WHalgorithm_test.png)
