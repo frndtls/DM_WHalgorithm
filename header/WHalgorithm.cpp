@@ -178,7 +178,7 @@ void splitAxiom(const std::tuple<int, int> split, Axiom axiom,
             axioms.push(ax1);
             std::cout << "enqueue: ";
             ax1.showAxiom();
-            Axiom ax2;
+            Axiom ax2 = axiom;
             ax2.conclusion.push_back(str2);
             axioms.push(ax2);
             std::cout << "enqueue: ";

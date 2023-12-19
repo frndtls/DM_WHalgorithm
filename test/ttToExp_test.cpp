@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 
-#include "expToPar.h"
-#include "expToTT.h"
+#include "../header/expToPar.h"
+#include "../header/expToTT.h"
 
 int main() {
   int n; /*命题个数*/

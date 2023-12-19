@@ -1,10 +1,10 @@
 // @copyright<lhx>[2023.12.16]
-#include "expToPar.h"
+#include "../header/expToPar.h"
 
 #include <iostream>
 
-#include "expToTT.h"
-#include "operators.h"
+#include "../header/expToTT.h"
+#include "../header/operators.h"
 
 int main() {
   std::string str;

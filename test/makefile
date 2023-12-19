@@ -18,10 +18,10 @@ WHalgorithm_test: WHalgorithm_test.o expToTT.o  operators.o WHalgorithm.o
 WHalgorithm_test.o:WHalgorithm_test.cpp
 	g++ -c $^ -o $@
 
-WHalgorithm.o:WHalgorithm.cpp
+WHalgorithm.o:../header/WHalgorithm.cpp
 	g++ -c $^ -o $@
 
-boilDownInference.o:boilDownInference.cpp
+boilDownInference.o:../header/boilDownInference.cpp
 	g++ -c $^ -o $@
 
 ttToExp_test.o:ttToExp_test.cpp
@@ -30,16 +30,16 @@ ttToExp_test.o:ttToExp_test.cpp
 expToPar_test.o:expToPar_test.cpp
 	g++ -c $^ -o $@
 
-expToPar.o:expToPar.cpp
+expToPar.o:../header/expToPar.cpp
 	g++ -c $^ -o $@
 
 expToTT_test.o:expToTT_test.cpp
 	g++ -c $^ -o $@
 
-expToTT.o:expToTT.cpp
+expToTT.o:../header/expToTT.cpp
 	g++ -c $^ -o $@
 
-operators.o:operators.cpp
+operators.o:../header/operators.cpp
 	g++ -c $^ -o $@
 	
 clean:

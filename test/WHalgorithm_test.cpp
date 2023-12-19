@@ -1,6 +1,6 @@
 // @copyright<lhx>[2023.12.18]
 
-#include "WHalgorithm.h"
+#include "../header/WHalgorithm.h"
 
 #include <iostream>
 #include <string>
